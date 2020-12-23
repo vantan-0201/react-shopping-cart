@@ -1,0 +1,26 @@
+.titleNav {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-nav);
+  padding: 41px 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s linear;
+
+  &:hover {
+    opacity: 0.8;
+  }
+  svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.titleNav--sizeM {
+  padding: 12px 25px;
+  font-size: 13px;
+}

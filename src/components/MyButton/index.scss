@@ -1,0 +1,44 @@
+$btn-width: 100px;
+
+.btn {
+  padding: 14px 24px;
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  min-width: $btn-width;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.btn--sizeL {
+  padding: 22px 32px;
+  font-size: 24px;
+}
+
+.btn--sizeS {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.btn--effect {
+  position: relative;
+  &:hover {
+    opacity: 0.9;
+    &::after {
+      transform: translateX(0);
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transform: translateX(-100%);
+    background-color: green;
+    transition: all 0.3s linear;
+  }
+}

@@ -1,0 +1,64 @@
+@import "reset";
+
+:root {
+  --curnon-font: Montserrat, -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-white: white;
+  --culor-border: rgba(0, 0, 0, 0.1);
+  --color-nav: #302d2d;
+}
+
+.flex {
+  display: flex;
+}
+
+.j-between {
+  justify-content: space-between;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+.a-center {
+  align-items: center;
+}
+
+.txt-up {
+  text-transform: uppercase;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.position__relative {
+  position: relative;
+}
+
+.position__absolute {
+  position: absolute;
+}
+
+.left-transform {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.item-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.block {
+  display: block;
+}
+
+.fullWidth {
+  width: 100%;
+}
