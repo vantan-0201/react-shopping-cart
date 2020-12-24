@@ -1,33 +1,44 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { products } from "../../data.json";
+import {
+  actSortProductHigher,
+  actSortProductLower,
+  actSortProductFit,
+} from "../../redux/actions/actionProducts";
+
+// import { products } from "../../data.json";
 
 import ProductList from "../../components/ProductList";
 import Fillter from "../../components/Fillter";
 
 export default function HomePage() {
-  const [productList, setProductList] = React.useState(products);
-  const countProduct = productList.length;
+  const {
+    fetchProductsSucess,
+    fetchProductsPending,
+    fetchProductsError,
+  } = useSelector((state) => ({
+    fetchProductsSucess: state.products.products,
+    fetchProductsPending: state.products.pending,
+    fetchProductsError: state.products.error,
+  }));
+
+  const dispatch = useDispatch();
+
+  const countProduct = fetchProductsSucess.length;
 
   const handleSortProduct = (event) => {
     const val = event.target.value;
 
-    const sortDecrease = productList.slice().sort((a, b) => {
-      return b.price - a.price;
-    });
-    const sortAscending = productList.slice().sort((a, b) => {
-      return a.price - b.price;
-    });
-
-    val === "ascending" && setProductList(sortAscending);
-    val === "decrease" && setProductList(sortDecrease);
-    val === "fit" && setProductList(products);
+    val === "higher" && dispatch(actSortProductHigher(fetchProductsSucess));
+    val === "lower" && dispatch(actSortProductLower(fetchProductsSucess));
+    val === "fit" && dispatch(actSortProductFit(fetchProductsSucess));
   };
 
   return (
     <>
       <Fillter handleSortProduct={handleSortProduct} count={countProduct} />
-      <ProductList productList={productList} />
+      <ProductList productList={fetchProductsSucess} />
     </>
   );
 }

@@ -6,7 +6,7 @@ import MyButton from "../MyButton";
 import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import { Link } from "react-router-dom";
 export default function Product(props) {
-  const { _id, img, name, price, description } = props;
+  const { _id, img, name, price, description, addToCart } = props;
   return (
     <div className="product">
       <div className="product__img">
@@ -20,7 +20,7 @@ export default function Product(props) {
           <span className="product__name block ">{name}</span>
         </Link>
         <p className="product__price">{price}</p>
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "20px" }} onClick={() => addToCart(_id)}>
           <MyButton
             txt="chọn mua"
             effect={true}

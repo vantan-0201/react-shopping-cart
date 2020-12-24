@@ -5,6 +5,7 @@ import logoApp from "../../assets/imgs/logoApp.svg";
 import HeaderBarLeftMB from "../HeaderBarLeftMB";
 
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import TitleNav from "../TitleNav";
 import SearchIcon from "@material-ui/icons/Search";
@@ -19,6 +20,8 @@ import Hidden from "@material-ui/core/Hidden";
 
 export default function Header() {
   const [hasAffix, setHasAffix] = React.useState(false);
+
+  const count = useSelector((state) => state.cartProducts.products).length;
 
   const [isOpen, setIsOpen] = React.useState({
     menuMb: false,
@@ -165,6 +168,7 @@ export default function Header() {
               text="giỏ hàng"
               icon={<ShoppingCartIcon fontSize="large" />}
             />
+            <span className="countCart">{count}</span>
             <Cart toggleDrawer={toggleDrawer} isOpen={isOpen["cart"]} />
           </Grid>
           <Hidden smDown={true}>

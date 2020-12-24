@@ -24,6 +24,24 @@
         margin: 0 25px;
         cursor: pointer;
       }
+      .nav__cart {
+        position: relative;
+        .countCart {
+          position: absolute;
+          top: 40%;
+          right: -16px;
+          transform: translateY(-50%);
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          border-radius: 50%;
+          background-color: #000;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 100;
+          color: var(--color-white);
+        }
+      }
       .nav__acounts {
         &::after {
           content: "";

@@ -39,8 +39,8 @@ export default function Fillter(props) {
           value={sort}
         >
           <option value="fit">SẮP XẾP THEO PHÙ HỢP NHẤT</option>
-          <option value="ascending">SẮP XẾP THEO GIÁ TĂNG DẦN</option>
-          <option value="decrease">SẮP XẾP THEO GIÁ GIẢM DẦN</option>
+          <option value="higher">SẮP XẾP THEO GIÁ TĂNG DẦN</option>
+          <option value="lower">SẮP XẾP THEO GIÁ GIẢM DẦN</option>
         </Select>
       </Container>
     </div>

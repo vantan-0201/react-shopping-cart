@@ -1,6 +1,9 @@
 import React from "react";
 import "./index.scss";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+
+import { formatCurrency } from "../../util";
 
 import CartProductList from "../CartProductList";
 import MyButton from "../MyButton";
@@ -14,39 +17,17 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import IconButton from "@material-ui/core/IconButton";
 import Drawer from "@material-ui/core/Drawer";
 
-const products = [
-  {
-    img:
-      "https://curnonwatch.com/media/catalog/product/cache/d96eb53c23516f6ca600411b8495131f/p/a/paul.png?auto=webp&format=png&width=2560&height=2560&fit=cover&method=fit&nocrop=true",
-    name: "paul",
-    price: "2.200.000",
-    _id: 1,
-  },
-  {
-    img:
-      "https://curnonwatch.com/media/catalog/product/cache/d96eb53c23516f6ca600411b8495131f/p/a/paul.png?auto=webp&format=png&width=2560&height=2560&fit=cover&method=fit&nocrop=true",
-    name: "paul",
-    price: "2.200.000",
-    _id: 2,
-  },
-  {
-    img:
-      "https://curnonwatch.com/media/catalog/product/cache/d96eb53c23516f6ca600411b8495131f/p/a/paul.png?auto=webp&format=png&width=2560&height=2560&fit=cover&method=fit&nocrop=true",
-    name: "paul",
-    price: "2.200.000",
-    _id: 3,
-  },
-  {
-    img:
-      "https://curnonwatch.com/media/catalog/product/cache/d96eb53c23516f6ca600411b8495131f/p/a/paul.png?auto=webp&format=png&width=2560&height=2560&fit=cover&method=fit&nocrop=true",
-    name: "paul",
-    price: "2.200.000",
-    _id: 4,
-  },
-];
-
 export default function Cart(props) {
   const { isOpen } = props;
+
+  const cartProducts = useSelector((state) => state.cartProducts.products);
+
+  const handleTotalPrice = (products) => {
+    return products.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.price,
+      0
+    );
+  };
 
   const toggleDrawer = (element, open, e) => {
     e.stopPropagation();
@@ -68,18 +49,27 @@ export default function Cart(props) {
       </div>
 
       <div className="cart__content position__relative flex a-center j-between">
-        <CartProductList products={products} />
+        <CartProductList products={cartProducts} toggleDrawer={toggleDrawer} />
 
-        <div className="cart__totalPrice txt-center">
-          <Divider />
-          <div className="cart__totalPrice__title flex a-center j-between">
-            <h3 className="txt-up">thành tiền</h3>
-            <Price price={2000000} />
+        {cartProducts.length ? (
+          <div className="cart__totalPrice txt-center">
+            <Divider />
+            <div className="cart__totalPrice__title flex a-center j-between">
+              <h3 className="txt-up">thành tiền</h3>
+              <Price price={formatCurrency(handleTotalPrice(cartProducts))} />
+            </div>
+            <div>
+              <MyButton
+                fullWidth
+                effect
+                className=""
+                txt="thanh toán"
+              ></MyButton>
+            </div>
           </div>
-          <div>
-            <MyButton fullWidth effect className="" txt="thanh toán"></MyButton>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="cart__footer flex j-between">

@@ -4,11 +4,8 @@ import "./index.scss";
 
 function Price(props) {
   const { price } = props;
-  const formatPrice = price.toLocaleString("vi", {
-    style: "currency",
-    currency: "VND",
-  });
-  return price ? <span>{formatPrice}</span> : "";
+
+  return <span>{price}</span>;
 }
 
 Price.propTypes = {
