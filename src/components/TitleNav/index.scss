@@ -1,14 +1,13 @@
 .titleNav {
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-nav);
   padding: 41px 25px;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   position: relative;
   transition: all 0.3s linear;
-
+  color: inherit;
   &:hover {
     opacity: 0.8;
   }

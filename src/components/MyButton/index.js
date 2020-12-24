@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./index.scss";
 
-function MyButton({ txt, effect, sizeL, sizeS, fullWidth }) {
+function MyButton({ txt, effect, sizeL, sizeS, fullWidth, icon }) {
   return (
     <button
       className={`btn txt-up cursor 
@@ -12,6 +12,7 @@ function MyButton({ txt, effect, sizeL, sizeS, fullWidth }) {
       ${fullWidth ? "fullWidth" : ""}
   `}
     >
+      <span className="icon">{icon && icon}</span>
       {txt}
     </button>
   );
@@ -19,7 +20,7 @@ function MyButton({ txt, effect, sizeL, sizeS, fullWidth }) {
 
 MyButton.propTypes = {
   txt: PropTypes.string.isRequired,
-  effect: PropTypes.string,
+  effect: PropTypes.bool,
   sizeL: PropTypes.string,
   sizeS: PropTypes.string,
 };

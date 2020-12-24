@@ -9,6 +9,13 @@ $btn-width: 100px;
   min-width: $btn-width;
   overflow: hidden;
   background-color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  .icon {
+    margin-right: 6px;
+    font-size: 22px;
+  }
 }
 
 .btn--sizeL {

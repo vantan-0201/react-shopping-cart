@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-
+  z-index: 999;
   background-color: var(--color-white);
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
   .headerBar {
@@ -14,6 +14,9 @@
     .headerBar__item {
       &:not(:last-child) {
         margin-right: 20px;
+      }
+      .navLink {
+        color: var(--color-nav);
       }
     }
     .headerBar__right {

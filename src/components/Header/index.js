@@ -4,7 +4,7 @@ import logoApp from "../../assets/imgs/logoApp.svg";
 
 import HeaderBarLeftMB from "../HeaderBarLeftMB";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import TitleNav from "../TitleNav";
 import SearchIcon from "@material-ui/icons/Search";
@@ -79,19 +79,31 @@ export default function Header() {
             component="ul"
           >
             <Grid item component="li" className="headerBar__item">
-              <Link to="/dong-ho-nam" className="navLink">
+              <NavLink
+                activeStyle={{ color: "red" }}
+                to="/dong-ho-nam"
+                className="navLink"
+              >
                 <TitleNav text="đồng hồ nam" />
-              </Link>
+              </NavLink>
             </Grid>
             <Grid item component="li" className="headerBar__item">
-              <Link to="/dong-ho-nu" className="navLink">
+              <NavLink
+                activeStyle={{ color: "red" }}
+                to="/dong-ho-nu"
+                className="navLink"
+              >
                 <TitleNav text="đồng hồ nữ" />
-              </Link>
+              </NavLink>
             </Grid>
             <Grid item component="li" className="headerBar__item">
-              <Link to="/about" className="navLink">
+              <NavLink
+                activeStyle={{ color: "red" }}
+                to="/about"
+                className="navLink"
+              >
                 <TitleNav text="thương hiệu" />
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </Hidden>
