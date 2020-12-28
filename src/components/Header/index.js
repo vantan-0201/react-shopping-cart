@@ -21,7 +21,14 @@ import Hidden from "@material-ui/core/Hidden";
 export default function Header() {
   const [hasAffix, setHasAffix] = React.useState(false);
 
-  const count = useSelector((state) => state.cartProducts.products).length;
+  const countTotal = useSelector((state) => state.cartProducts.products);
+
+  const handelTotalCount = (products) => {
+    return products.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.count,
+      0
+    );
+  };
 
   const [isOpen, setIsOpen] = React.useState({
     menuMb: false,
@@ -168,7 +175,7 @@ export default function Header() {
               text="giỏ hàng"
               icon={<ShoppingCartIcon fontSize="large" />}
             />
-            <span className="countCart">{count}</span>
+            <span className="countCart">{handelTotalCount(countTotal)}</span>
             <Cart toggleDrawer={toggleDrawer} isOpen={isOpen["cart"]} />
           </Grid>
           <Hidden smDown={true}>

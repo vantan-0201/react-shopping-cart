@@ -1,39 +1,24 @@
-import React from "react";
+import React, { memo } from "react";
 import "./index.scss";
 import CartProduct from "../CartProduct";
 import MyButton from "../MyButton";
 
-import { formatCurrency } from "../../util";
-
-import { useDispatch } from "react-redux";
-
-import { actRemoveToCart } from "../../redux/actions/actionProducts";
-
-export default function CartProductList(props) {
-  const { products, toggleDrawer } = props;
-  const dispatch = useDispatch();
-
-  const handleCount = (e) => {
-    // console.log(e);
-  };
-
-  const handleRemoveToCart = (_id) => {
-    dispatch(actRemoveToCart(_id));
-  };
+const CartProductList = memo((props) => {
+  const { toggleDrawer, products, handleRemoveToCart, handleQuantity } = props;
 
   return (
-    <div className="CartsList">
+    <div className="CartsList" onClick={(e) => e.stopPropagation()}>
       {products.length ? (
         products.map((product, index) => (
           <CartProduct
             img={product.img}
             name={product.name}
-            price={formatCurrency(product.price)}
+            price={product.price}
             key={index}
-            count={1}
-            _id={index}
-            handleCount={handleCount}
+            countParent={product.count}
+            _id={product._id}
             handleRemoveToCart={handleRemoveToCart}
+            handleQuantity={handleQuantity}
           />
         ))
       ) : (
@@ -48,4 +33,6 @@ export default function CartProductList(props) {
       )}
     </div>
   );
-}
+});
+
+export default CartProductList;

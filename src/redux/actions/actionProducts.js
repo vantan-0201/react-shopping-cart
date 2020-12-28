@@ -42,11 +42,16 @@ export const actSortProductFit = (products) => ({
   products,
 });
 
-export const actAddToCart = (products) => ({
+export const actAddToCart = (_id) => ({
   type: types.ADD_TO_CART,
-  products,
+  _id,
 });
 export const actRemoveToCart = (_id) => ({
   type: types.REMOVE_TO_CART,
+  _id,
+});
+
+export const actRemoveToOneCart = (_id) => ({
+  type: types.REMOVE_TO_ONE_CART,
   _id,
 });

@@ -5,6 +5,7 @@ import {
   actSortProductHigher,
   actSortProductLower,
   actSortProductFit,
+  actAddToCart,
 } from "../../redux/actions/actionProducts";
 
 // import { products } from "../../data.json";
@@ -35,10 +36,15 @@ export default function HomePage() {
     val === "fit" && dispatch(actSortProductFit(fetchProductsSucess));
   };
 
+  const addToCart = (id) => {
+    const product = fetchProductsSucess.filter((product) => product._id === id);
+    dispatch(actAddToCart(...product));
+  };
+
   return (
     <>
       <Fillter handleSortProduct={handleSortProduct} count={countProduct} />
-      <ProductList productList={fetchProductsSucess} />
+      <ProductList productList={fetchProductsSucess} addToCart={addToCart} />
     </>
   );
 }

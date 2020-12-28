@@ -1,9 +1,13 @@
 import React from "react";
 import "./index.scss";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { formatCurrency } from "../../util";
+import {
+  actRemoveToCart,
+  actAddToCart,
+  actRemoveToOneCart,
+} from "../../redux/actions/actionProducts";
 
 import CartProductList from "../CartProductList";
 import MyButton from "../MyButton";
@@ -19,14 +23,30 @@ import Drawer from "@material-ui/core/Drawer";
 
 export default function Cart(props) {
   const { isOpen } = props;
+  const dispatch = useDispatch();
 
   const cartProducts = useSelector((state) => state.cartProducts.products);
 
   const handleTotalPrice = (products) => {
     return products.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.price,
+      (accumulator, currentValue) =>
+        accumulator + currentValue.price * currentValue.count,
       0
     );
+  };
+
+  const handleRemoveToCart = (_id) => {
+    dispatch(actRemoveToCart(_id));
+  };
+
+  const handleQuantity = (_id, count) => {
+    const product = cartProducts.filter((product) => product._id === _id);
+    if (count) {
+      dispatch(actAddToCart(...product));
+    }
+    if (!count) {
+      dispatch(actRemoveToOneCart(...product));
+    }
   };
 
   const toggleDrawer = (element, open, e) => {
@@ -49,14 +69,19 @@ export default function Cart(props) {
       </div>
 
       <div className="cart__content position__relative flex a-center j-between">
-        <CartProductList products={cartProducts} toggleDrawer={toggleDrawer} />
+        <CartProductList
+          products={cartProducts}
+          toggleDrawer={toggleDrawer}
+          handleRemoveToCart={handleRemoveToCart}
+          handleQuantity={handleQuantity}
+        />
 
         {cartProducts.length ? (
           <div className="cart__totalPrice txt-center">
             <Divider />
             <div className="cart__totalPrice__title flex a-center j-between">
               <h3 className="txt-up">thành tiền</h3>
-              <Price price={formatCurrency(handleTotalPrice(cartProducts))} />
+              <Price price={handleTotalPrice(cartProducts)} />
             </div>
             <div>
               <MyButton

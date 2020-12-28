@@ -17,11 +17,24 @@
       font-size: 16px;
       text-transform: capitalize;
     }
-    .cartProduct__control {
+    .cartProduct__quantity {
       .cartProduct__amount {
-        width: 50px;
         padding: 0 6px;
         border: 1px solid rgba($color: #000000, $alpha: 0.8);
+        .MuiInput-input {
+          text-align: center;
+        }
+      }
+      .cartProduct__control {
+        flex-direction: column;
+        width: 20px;
+        button {
+          width: 100%;
+          height: 16px;
+          svg {
+            width: 100%;
+          }
+        }
       }
       .cartProduct__price {
         font-size: 16px;
@@ -29,7 +42,6 @@
         margin-left: 20px;
         position: relative;
         letter-spacing: 1px;
-        margin-top: auto;
         &::after {
           content: "x";
           position: absolute;

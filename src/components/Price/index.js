@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./index.scss";
+import { formatCurrency } from "../../util";
 
 function Price(props) {
-  const { price } = props;
+  const { price, className } = props;
 
-  return <span>{price}</span>;
+  return (
+    <span className={className ? className : ""}>{formatCurrency(price)}</span>
+  );
 }
 
 Price.propTypes = {
