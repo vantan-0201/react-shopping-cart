@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 export default function Fillter(props) {
-  const { count, sort } = props;
+  const { count, sort, handleSortProduct } = props;
   const useStyle = makeStyles(() => ({
     root: {
-      margin: "20px 0",
+      padding: "20px 0",
     },
     fillter__container: {
       display: "flex",
@@ -32,7 +32,7 @@ export default function Fillter(props) {
         </div>
         <Select
           native
-          onChange={props.handleSortProduct}
+          onChange={handleSortProduct}
           variant="standard"
           className={classes.fillter__selection}
           disableUnderline

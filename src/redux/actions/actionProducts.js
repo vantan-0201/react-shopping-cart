@@ -1,29 +1,53 @@
 import * as types from "../../contants/actionTypes";
 
-// export const actFetchProductsRequest = () => {
-//     return (dispatch) => {
-//       dispatch(actGetProductsPending());
+import products from "../../data.json";
 
-//       Axios.get("http://localhost:3004/dong-ho")
-//         .then((res) => {
-//           const products = res.data;
-//           dispatch(actGetProductSuccess(products));
-//         })
-//         .catch((error) => dispatch(actGetProductsError(error)));
-//     };
-//   };
+export function actFetchProductsRequest() {
+  return (dispatch) => {
+    dispatch(actGetProductsPending());
+
+    setTimeout(function () {
+      dispatch(actGetProductSuccess(products.products));
+    }, 1000);
+  };
+}
+
+export function actFetchProductDetailRequest(num) {
+  return (dispatch) => {
+    dispatch(actGetProductDetailPending());
+    const product = products.products.find((pos) => pos.name === num);
+
+    setTimeout(function () {
+      dispatch(actGetProductDetailSuccess(product));
+    }, 1000);
+  };
+}
 
 export const actGetProductsPending = () => ({
-  type: types.GET_PRODUCT_PENDDING,
+  type: types.GET_PRODUCTS_PENDDING,
 });
 
 export const actGetProductSuccess = (products) => ({
-  type: types.GET_PRODUCT_PENDDING,
+  type: types.GET_PRODUCTS_SUCCESS,
   products,
 });
 
 export const actGetProductsError = (error) => ({
-  type: types.GET_PRODUCT_PENDDING,
+  type: types.GET_PRODUCTS_ERROR,
+  error,
+});
+
+export const actGetProductDetailPending = () => ({
+  type: types.GET_PRODUCTDETAIL_PENDDING,
+});
+
+export const actGetProductDetailSuccess = (product) => ({
+  type: types.GET_PRODUCTDETAIL_SUCCESS,
+  product,
+});
+
+export const actGetProductDetailError = (error) => ({
+  type: types.GET_PRODUCTDETAIL_ERROR,
   error,
 });
 
@@ -42,16 +66,32 @@ export const actSortProductFit = (products) => ({
   products,
 });
 
-export const actAddToCart = (_id) => ({
+export const actAddToCart = (product) => ({
   type: types.ADD_TO_CART,
-  _id,
+  product,
 });
 export const actRemoveToCart = (_id) => ({
   type: types.REMOVE_TO_CART,
   _id,
 });
 
-export const actRemoveToOneCart = (_id) => ({
+export const actRemoveToOneCart = (product) => ({
   type: types.REMOVE_TO_ONE_CART,
-  _id,
+  product,
+});
+
+export const actChangeCountCart = (product, count) => ({
+  type: types.CHANGE_COUNT_CART,
+  product,
+  count,
+});
+
+export const actOpenDrawer = (element) => ({
+  type: types.OPEN_CART,
+  element,
+});
+
+export const actCloseDrawer = (element) => ({
+  type: types.CLOSE_CART,
+  element,
 });

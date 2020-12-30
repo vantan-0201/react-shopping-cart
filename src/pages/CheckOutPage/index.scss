@@ -1,0 +1,41 @@
+.checkOutPage {
+  padding: 35px 0;
+
+  .mainStep {
+    .mainStep__header {
+      margin-bottom: 20px;
+      .mainStep__title {
+        font-size: 24px;
+        color: #000;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+      .mainStep__desc {
+        font-size: 12px;
+        opacity: 0.8;
+        letter-spacing: 1px;
+        strong {
+          color: green;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .mainStep__footer {
+      margin-top: 20px;
+      .mainStep__note {
+        font-size: 14px;
+        margin-bottom: 20px;
+        font-weight: 100;
+      }
+      .mainStep__hotline {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+    .form__checkOut {
+      max-width: 80%;
+      margin: auto;
+    }
+  }
+}

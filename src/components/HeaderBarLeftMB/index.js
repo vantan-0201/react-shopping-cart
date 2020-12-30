@@ -1,5 +1,7 @@
 import React from "react";
 
+import { actCloseDrawer } from "../../redux/actions/actionProducts";
+
 import TitleNav from "../TitleNav";
 
 import { Link } from "react-router-dom";
@@ -10,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import CloseIcon from "@material-ui/icons/Close";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import { useSelector, useDispatch } from "react-redux";
 
 const navLinks = [
   {
@@ -41,17 +44,19 @@ const useStyes = makeStyles({
 });
 
 function HeaderBarLeftMB(props) {
-  const { isOpen } = props;
   const classes = useStyes();
+  const dispatch = useDispatch();
 
-  const toggleDrawer = (el, open, e) => {
-    props.toggleDrawer && props.toggleDrawer(el, open, e);
+  const isOpenMenuMb = useSelector((state) => state.isOpenDrawer.menuMb);
+
+  const toggleDrawer = (el, e) => {
+    dispatch(actCloseDrawer(el));
   };
 
   const MenuList = () => (
     <List
-      onClick={(e) => toggleDrawer("menuMb", false, e)}
-      onKeyDown={(e) => toggleDrawer("menuMb", false, e)}
+      onClick={(e) => toggleDrawer("menuMb", e)}
+      onKeyDown={(e) => toggleDrawer("menuMb", e)}
       style={{ minWidth: "320px" }}
     >
       {navLinks.map((item) => (
@@ -67,12 +72,12 @@ function HeaderBarLeftMB(props) {
   return (
     <Drawer
       anchor="left"
-      open={isOpen}
-      onClose={(e) => toggleDrawer("menuMb", false, e)}
+      open={isOpenMenuMb}
+      onClose={(e) => toggleDrawer("menuMb", e)}
       className={`HeaderMb ${classes.menuList}`}
     >
       <IconButton
-        onClick={(e) => toggleDrawer("menuMb", false, e)}
+        onClick={(e) => toggleDrawer("menuMb", e)}
         style={{ justifyContent: "flex-start" }}
       >
         <CloseIcon fontSize="large" />

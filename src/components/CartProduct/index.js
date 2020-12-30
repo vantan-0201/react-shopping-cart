@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import "./index.scss";
 
 import Input from "@material-ui/core/Input";
@@ -7,23 +7,18 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Price from "../Price";
 
-const CartProduct = memo((props) => {
+const CartProduct = (props) => {
   const {
-    img,
-    name,
-    price,
-    _id,
-    countParent,
+    product,
     handleRemoveToCart,
     handleQuantity,
+    handleChangeCount,
+    handleKeyDown,
   } = props;
 
-  const [count, setCount] = React.useState(countParent);
+  const { img, name, price, count, _id } = product;
 
-  const handleChangeCount = (e) => {
-    if (!Number(e.target.value)) return;
-    setCount(Number(e.target.value));
-  };
+  console.log("cart product");
 
   return (
     <div
@@ -46,18 +41,22 @@ const CartProduct = memo((props) => {
             <Input
               className="cartProduct__amount"
               value={count}
-              onChange={handleChangeCount}
+              onChange={(e) => handleChangeCount(_id, e)}
+              // onKeyDown={(e) => handleKeyDown(_id, e)}
               disableUnderline
               fullWidth
               style={{ border: "none", fontSize: "14px", width: "34px" }}
             />
             <div className="cartProduct__control flex j-between">
-              <button className="cursor" onClick={() => handleQuantity(_id, 1)}>
+              <button
+                className="cursor"
+                onClick={() => handleQuantity(_id, true)}
+              >
                 <ArrowDropUpIcon />
               </button>
               <button
                 className="cursor"
-                onClick={() => handleQuantity(_id, -1)}
+                onClick={() => handleQuantity(_id, false)}
               >
                 <ArrowDropDownIcon />
               </button>
@@ -75,6 +74,6 @@ const CartProduct = memo((props) => {
       </span>
     </div>
   );
-});
+};
 
 export default CartProduct;

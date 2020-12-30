@@ -1,0 +1,12 @@
+.form__group {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  .form__control {
+  }
+  .form__error {
+    font-size: 13px;
+    color: red;
+    margin-top: 6px;
+  }
+}

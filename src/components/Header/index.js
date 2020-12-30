@@ -2,25 +2,26 @@ import React from "react";
 import "./index.scss";
 import logoApp from "../../assets/imgs/logoApp.svg";
 
-import HeaderBarLeftMB from "../HeaderBarLeftMB";
-
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import TitleNav from "../TitleNav";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Cart from "../Cart";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
+import { actOpenDrawer } from "../../redux/actions/actionProducts";
 
 export default function Header() {
   const [hasAffix, setHasAffix] = React.useState(false);
 
+  const dispatch = useDispatch();
+
+  // const countTotal = useSelector((state) => state.cartProducts);
   const countTotal = useSelector((state) => state.cartProducts.products);
 
   const handelTotalCount = (products) => {
@@ -30,37 +31,28 @@ export default function Header() {
     );
   };
 
-  const [isOpen, setIsOpen] = React.useState({
-    menuMb: false,
-    cart: false,
-  });
+  window.onscroll = () => {
+    let a = window.pageYOffset;
 
-  React.useEffect(() => {
-    window.onscroll = () => {
-      let a = window.pageYOffset;
+    const elHeader = document.getElementById("app-header");
+    const offSet = elHeader.offsetHeight;
+    if (a >= offSet) {
+      setHasAffix(true);
+    } else {
+      setHasAffix(false);
+    }
+  };
 
-      const elHeader = document.getElementById("app-header");
-      const offSet = elHeader.offsetHeight;
-      if (a >= offSet) {
-        setHasAffix(true);
-      } else {
-        setHasAffix(false);
-      }
-    };
-  }, []);
-
-  const toggleDrawer = (element, open, event) => {
+  const handelOpenDrawer = (element, event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     )
       return;
-    setIsOpen({
-      ...isOpen,
-      [element]: open,
-    });
+    dispatch(actOpenDrawer(element));
   };
 
+  console.log("header");
   return (
     <header
       className="app-header"
@@ -120,13 +112,9 @@ export default function Header() {
 
         <Hidden only={["xl", "lg", "md"]}>
           <Grid item xs={5} className="headerBar__mb">
-            <IconButton onClick={(e) => toggleDrawer("menuMb", true, e)}>
+            <IconButton onClick={(e) => handelOpenDrawer("menuMb", e)}>
               <MenuIcon fontSize="large" />
             </IconButton>
-            <HeaderBarLeftMB
-              isOpen={isOpen["menuMb"]}
-              toggleDrawer={toggleDrawer}
-            />
           </Grid>
         </Hidden>
 
@@ -169,14 +157,13 @@ export default function Header() {
             item
             component="li"
             className="headerBar__item nav__cart"
-            onClick={(e) => toggleDrawer("cart", true, e)}
+            onClick={(e) => handelOpenDrawer("cart", e)}
           >
             <TitleNav
               text="giỏ hàng"
               icon={<ShoppingCartIcon fontSize="large" />}
             />
             <span className="countCart">{handelTotalCount(countTotal)}</span>
-            <Cart toggleDrawer={toggleDrawer} isOpen={isOpen["cart"]} />
           </Grid>
           <Hidden smDown={true}>
             <Grid item component="li" className="headerBar__item nav__search">
