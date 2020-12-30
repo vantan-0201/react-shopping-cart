@@ -52,7 +52,7 @@ export default function Header() {
     dispatch(actOpenDrawer(element));
   };
 
-  console.log("header");
+  // console.log("header");
   return (
     <header
       className="app-header"

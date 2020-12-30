@@ -19,6 +19,7 @@ import {
   actRemoveToOneCart,
   actChangeCountCart,
   actCloseDrawer,
+  actRemoveCountCart,
 } from "../../redux/actions/actionProducts";
 
 function Cart() {
@@ -35,7 +36,7 @@ function Cart() {
   const handleChangeCount = (_id, e) => {
     if (!Number(e.target.value)) return;
     const product = products.filter((product) => product._id === _id);
-    dispatch(actChangeCountCart(...product, e.target.value));
+    dispatch(actChangeCountCart(...product, Number(e.target.value)));
   };
 
   const handleRemoveToCart = (_id) => {
@@ -51,18 +52,22 @@ function Cart() {
   const handleTotalPrice = (products) => {
     return products.reduce(
       (accumulator, currentValue) =>
-        accumulator + currentValue.price * currentValue.count,
+        accumulator + currentValue.price * Number(currentValue.count),
       0
     );
   };
-  // // const handleKeyDown = (_id, e) => {
-  // //   if (!Number(e.target.value)) return;
-  // //   console.log(e.target.value);
-  // //   const product = products.filter((product) => product._id === _id);
-  // //   dispatch(actChangeCountCart(...product, e.target.value));
-  // // };
-
-  console.log("cart");
+  const handleKeyUp = (_id, e) => {
+    if (!Number(e.target.value)) return;
+    if (e.which !== 8) return;
+    const product = products.filter((product) => product._id === _id);
+    dispatch(actRemoveCountCart(...product));
+    if (!product[0].count) {
+      setTimeout(() => {
+        dispatch(actRemoveToCart(_id));
+      }, 3000);
+    }
+  };
+  // console.log("cart");
 
   return (
     <Drawer
@@ -90,6 +95,7 @@ function Cart() {
             handleQuantity={handleQuantity}
             handleChangeCount={handleChangeCount}
             products={products}
+            handleKeyUp={handleKeyUp}
           />
 
           <CartTotalPrice

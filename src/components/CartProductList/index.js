@@ -10,9 +10,10 @@ const CartProductList = (props) => {
     handleChangeCount,
     handleCloseCart,
     handleQuantity,
+    handleKeyUp,
   } = props;
 
-  console.log("cart list");
+  // console.log("cart list");
 
   return (
     <div className="CartsList" onClick={(e) => e.stopPropagation()}>
@@ -24,7 +25,7 @@ const CartProductList = (props) => {
             handleRemoveToCart={handleRemoveToCart}
             handleQuantity={handleQuantity}
             handleChangeCount={handleChangeCount}
-            // handleKeyDown={handleKeyDown}
+            handleKeyUp={handleKeyUp}
           />
         ))
       ) : (

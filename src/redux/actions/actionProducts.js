@@ -86,6 +86,12 @@ export const actChangeCountCart = (product, count) => ({
   count,
 });
 
+export const actRemoveCountCart = (product, count) => ({
+  type: types.REMOVE_COUNT_CART,
+  product,
+  count,
+});
+
 export const actOpenDrawer = (element) => ({
   type: types.OPEN_CART,
   element,

@@ -14,6 +14,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";
 export const REMOVE_TO_ONE_CART = "REMOVE_TO_ONE_CART";
 export const CHANGE_COUNT_CART = "CHANGE_COUNT_CART";
+export const REMOVE_COUNT_CART = "REMOVE_COUNT_CART";
 
 export const OPEN_CART = "OPEN_CART";
 export const CLOSE_CART = "CLOSE_CART";

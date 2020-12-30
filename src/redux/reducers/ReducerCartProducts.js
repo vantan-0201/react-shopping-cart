@@ -6,8 +6,19 @@ const initialState = {
     : [],
 };
 
+// const findIndex = (cart, product) => {
+//   let index = -1;
+//   if (!cart.length) return;
+//   cart.forEach((item, i) => {
+//     if (item._id === product) {
+//       index = i;
+//     }
+//   });
+//   return index;
+// };
+
 export default function CartProducts(state = initialState, action) {
-  const duplicateProducts = state.products.slice();
+  let duplicateProducts = state.products.slice();
   switch (action.type) {
     case types.ADD_TO_CART:
       var alreadyInCart = false;
@@ -62,11 +73,21 @@ export default function CartProducts(state = initialState, action) {
       };
 
     case types.CHANGE_COUNT_CART:
-      console.log(action);
-
       duplicateProducts.forEach((item) => {
         if (item._id === action.product._id) {
-          item.count = action.count;
+          item.count = Number(action.count);
+        }
+      });
+
+      return {
+        ...state,
+        products: duplicateProducts,
+      };
+
+    case types.REMOVE_COUNT_CART:
+      duplicateProducts.forEach((item) => {
+        if (item._id === action.product._id) {
+          if (item.count < 10) item.count = 0;
         }
       });
 

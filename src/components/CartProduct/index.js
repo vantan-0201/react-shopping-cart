@@ -13,12 +13,12 @@ const CartProduct = (props) => {
     handleRemoveToCart,
     handleQuantity,
     handleChangeCount,
-    handleKeyDown,
+    handleKeyUp,
   } = props;
 
   const { img, name, price, count, _id } = product;
 
-  console.log("cart product");
+  // console.log("cart product");
 
   return (
     <div
@@ -40,9 +40,10 @@ const CartProduct = (props) => {
           >
             <Input
               className="cartProduct__amount"
+              type="text"
               value={count}
               onChange={(e) => handleChangeCount(_id, e)}
-              // onKeyDown={(e) => handleKeyDown(_id, e)}
+              onKeyDown={(e) => handleKeyUp(_id, e)}
               disableUnderline
               fullWidth
               style={{ border: "none", fontSize: "14px", width: "34px" }}
