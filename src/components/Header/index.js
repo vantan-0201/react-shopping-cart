@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 import logoApp from "../../assets/imgs/logoApp.svg";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import TitleNav from "../TitleNav";
@@ -15,13 +15,13 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { actOpenDrawer } from "../../redux/actions/actionProducts";
+import NavBar from "../NavBar";
 
 export default function Header() {
   const [hasAffix, setHasAffix] = React.useState(false);
 
   const dispatch = useDispatch();
 
-  // const countTotal = useSelector((state) => state.cartProducts);
   const countTotal = useSelector((state) => state.cartProducts.products);
 
   const handelTotalCount = (products) => {
@@ -80,33 +80,14 @@ export default function Header() {
             className="headerBar__left"
             component="ul"
           >
-            <Grid item component="li" className="headerBar__item">
-              <NavLink
-                activeStyle={{ color: "red" }}
-                to="/dong-ho-nam"
-                className="navLink"
-              >
-                <TitleNav text="đồng hồ nam" />
-              </NavLink>
-            </Grid>
-            <Grid item component="li" className="headerBar__item">
-              <NavLink
-                activeStyle={{ color: "red" }}
-                to="/dong-ho-nu"
-                className="navLink"
-              >
-                <TitleNav text="đồng hồ nữ" />
-              </NavLink>
-            </Grid>
-            <Grid item component="li" className="headerBar__item">
-              <NavLink
-                activeStyle={{ color: "red" }}
-                to="/about"
-                className="navLink"
-              >
-                <TitleNav text="thương hiệu" />
-              </NavLink>
-            </Grid>
+            {/* {
+            NAV BAR ------------------------------------------
+          } */}
+            <NavBar />
+
+            {/* {
+            NAV BAR END------------------------------------------
+          } */}
           </Grid>
         </Hidden>
 
@@ -123,6 +104,7 @@ export default function Header() {
             <img src={logoApp} alt="logo-app" />
           </Link>
         </div>
+
         <Grid
           item
           xs={5}
@@ -153,6 +135,7 @@ export default function Header() {
               </ul>
             </Grid>
           </Hidden>
+
           <Grid
             item
             component="li"

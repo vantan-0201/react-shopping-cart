@@ -22,6 +22,8 @@ import {
   actRemoveCountCart,
 } from "../../redux/actions/actionProducts";
 
+var removeProductTimeOut;
+
 function Cart() {
   const dispatch = useDispatch();
 
@@ -33,18 +35,37 @@ function Cart() {
     dispatch(actCloseDrawer(element));
   };
 
-  const handleChangeCount = (_id, e) => {
+  const selectProduct = (products, id) => {
+    return products.filter((product) => product.id === id);
+  };
+
+  const handleKeyUp = (id, e) => {
     if (!Number(e.target.value)) return;
-    const product = products.filter((product) => product._id === _id);
+    if (e.which !== 8) return;
+    const product = selectProduct(products, id);
+
+    dispatch(actRemoveCountCart(...product));
+    if (!product[0].count) {
+      removeProductTimeOut = setTimeout(function () {
+        dispatch(actRemoveToCart(id));
+      }, 5000);
+    }
+  };
+
+  const handleChangeCount = (id, e) => {
+    if (!Number(e.target.value)) return;
+    const product = selectProduct(products, id);
     dispatch(actChangeCountCart(...product, Number(e.target.value)));
+    clearTimeout(removeProductTimeOut);
   };
 
-  const handleRemoveToCart = (_id) => {
-    dispatch(actRemoveToCart(_id));
+  const handleRemoveToCart = (id) => {
+    dispatch(actRemoveToCart(id));
   };
 
-  const handleQuantity = (_id, count) => {
-    const product = products.filter((product) => product._id === _id);
+  const handleQuantity = (id, count) => {
+    const product = selectProduct(products, id);
+
     count && dispatch(actAddToCart(...product));
     !count && dispatch(actRemoveToOneCart(...product));
   };
@@ -56,17 +77,7 @@ function Cart() {
       0
     );
   };
-  const handleKeyUp = (_id, e) => {
-    if (!Number(e.target.value)) return;
-    if (e.which !== 8) return;
-    const product = products.filter((product) => product._id === _id);
-    dispatch(actRemoveCountCart(...product));
-    if (!product[0].count) {
-      setTimeout(() => {
-        dispatch(actRemoveToCart(_id));
-      }, 3000);
-    }
-  };
+
   // console.log("cart");
 
   return (

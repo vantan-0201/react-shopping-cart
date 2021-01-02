@@ -16,7 +16,7 @@ const CartProduct = (props) => {
     handleKeyUp,
   } = props;
 
-  const { img, name, price, count, _id } = product;
+  const { img, name, price, count, id } = product;
 
   // console.log("cart product");
 
@@ -42,8 +42,8 @@ const CartProduct = (props) => {
               className="cartProduct__amount"
               type="text"
               value={count}
-              onChange={(e) => handleChangeCount(_id, e)}
-              onKeyDown={(e) => handleKeyUp(_id, e)}
+              onChange={(e) => handleChangeCount(id, e)}
+              onKeyDown={(e) => handleKeyUp(id, e)}
               disableUnderline
               fullWidth
               style={{ border: "none", fontSize: "14px", width: "34px" }}
@@ -51,13 +51,13 @@ const CartProduct = (props) => {
             <div className="cartProduct__control flex j-between">
               <button
                 className="cursor"
-                onClick={() => handleQuantity(_id, true)}
+                onClick={() => handleQuantity(id, true)}
               >
                 <ArrowDropUpIcon />
               </button>
               <button
                 className="cursor"
-                onClick={() => handleQuantity(_id, false)}
+                onClick={() => handleQuantity(id, false)}
               >
                 <ArrowDropDownIcon />
               </button>
@@ -69,7 +69,7 @@ const CartProduct = (props) => {
       </div>
       <span
         className="cartProduct__delete cursor"
-        onClick={(e) => handleRemoveToCart(_id, e)}
+        onClick={(e) => handleRemoveToCart(id, e)}
       >
         <DeleteOutlineIcon fontSize="large" />
       </span>

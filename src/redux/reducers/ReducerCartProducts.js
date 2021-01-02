@@ -10,7 +10,7 @@ const initialState = {
 //   let index = -1;
 //   if (!cart.length) return;
 //   cart.forEach((item, i) => {
-//     if (item._id === product) {
+//     if (item.id === product) {
 //       index = i;
 //     }
 //   });
@@ -24,8 +24,10 @@ export default function CartProducts(state = initialState, action) {
       var alreadyInCart = false;
       const product = action.product;
 
+      console.log(product);
+
       duplicateProducts.forEach((item, index) => {
-        if (item._id === product._id) {
+        if (item.id === product.id) {
           item.count++;
           alreadyInCart = true;
         }
@@ -46,9 +48,9 @@ export default function CartProducts(state = initialState, action) {
       };
 
     case types.REMOVE_TO_CART:
-      const _idProduct = action._id;
+      const idProduct = action.id;
       const sliceProduct = duplicateProducts.filter(
-        (product) => product._id !== _idProduct
+        (product) => product.id !== idProduct
       );
       localStorage.setItem("cartItems", JSON.stringify(sliceProduct));
 
@@ -59,7 +61,7 @@ export default function CartProducts(state = initialState, action) {
 
     case types.REMOVE_TO_ONE_CART:
       duplicateProducts.forEach((item) => {
-        if (item._id === action.product._id) {
+        if (item.id === action.product.id) {
           if (item.count === 1) return;
           item.count--;
         }
@@ -74,7 +76,7 @@ export default function CartProducts(state = initialState, action) {
 
     case types.CHANGE_COUNT_CART:
       duplicateProducts.forEach((item) => {
-        if (item._id === action.product._id) {
+        if (item.id === action.product.id) {
           item.count = Number(action.count);
         }
       });
@@ -86,7 +88,7 @@ export default function CartProducts(state = initialState, action) {
 
     case types.REMOVE_COUNT_CART:
       duplicateProducts.forEach((item) => {
-        if (item._id === action.product._id) {
+        if (item.id === action.product.id) {
           if (item.count < 10) item.count = 0;
         }
       });

@@ -1,0 +1,18 @@
+.bestSellers {
+  margin: 140px 0 115px 0;
+  &:last-child {
+    margin: 80px 0 115px 0;
+  }
+  .bestSellers__header {
+    text-align: center;
+    margin-bottom: 30px;
+    .sellers__more {
+      max-width: 15%;
+      margin: auto;
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+}

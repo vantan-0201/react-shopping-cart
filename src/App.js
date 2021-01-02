@@ -8,10 +8,9 @@ import { Backdrop } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Header from "./components/Header";
-import ProductDetail from "./components/ProductDetail";
 
-const HomePage = React.lazy(() => import("./pages/HomePage/index.js"));
-const CheckOutPage = React.lazy(() => import("./pages/CheckOutPage/index.js"));
+import routes from "./routes";
+
 const Cart = React.lazy(() => import("./Containers/Cart/index.js"));
 const HeaderBarLeftMB = React.lazy(() =>
   import("./components/HeaderBarLeftMB")
@@ -33,19 +32,15 @@ function App() {
           <HeaderBarLeftMB />
           <div className="mainPage">
             <Switch>
-              <Route path="/" exact>
-                <HomePage />
-              </Route>
-              <Route path="/checkout" exact>
-                <CheckOutPage />
-              </Route>
-
-              <Route path="/:product">
-                <ProductDetail />
-              </Route>
-              <Route path="/*">
-                <div>Not Found</div>
-              </Route>
+              {routes.length &&
+                routes.map((route, index) => (
+                  <Route
+                    path={route.path}
+                    exact={route.exact}
+                    component={route.main}
+                    key={index}
+                  />
+                ))}
             </Switch>
           </div>
         </BrowserRouter>

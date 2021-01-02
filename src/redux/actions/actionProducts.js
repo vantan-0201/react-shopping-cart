@@ -1,25 +1,26 @@
 import * as types from "../../contants/actionTypes";
 
-import products from "../../data.json";
+// import products from "../../data.json";
 
-export function actFetchProductsRequest() {
+import productApi from "../../Api/productApi";
+
+export function actFetchProductsRequest(url, _page, _limit) {
   return (dispatch) => {
     dispatch(actGetProductsPending());
 
-    setTimeout(function () {
-      dispatch(actGetProductSuccess(products.products));
-    }, 1000);
-  };
-}
-
-export function actFetchProductDetailRequest(num) {
-  return (dispatch) => {
-    dispatch(actGetProductDetailPending());
-    const product = products.products.find((pos) => pos.name === num);
-
-    setTimeout(function () {
-      dispatch(actGetProductDetailSuccess(product));
-    }, 1000);
+    const getProucts = async () => {
+      try {
+        const params = {
+          _page,
+          _limit,
+        };
+        const res = await productApi.getProductAll(url, params);
+        dispatch(actGetProductSuccess(res));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProucts();
   };
 }
 
@@ -34,20 +35,6 @@ export const actGetProductSuccess = (products) => ({
 
 export const actGetProductsError = (error) => ({
   type: types.GET_PRODUCTS_ERROR,
-  error,
-});
-
-export const actGetProductDetailPending = () => ({
-  type: types.GET_PRODUCTDETAIL_PENDDING,
-});
-
-export const actGetProductDetailSuccess = (product) => ({
-  type: types.GET_PRODUCTDETAIL_SUCCESS,
-  product,
-});
-
-export const actGetProductDetailError = (error) => ({
-  type: types.GET_PRODUCTDETAIL_ERROR,
   error,
 });
 
@@ -70,9 +57,9 @@ export const actAddToCart = (product) => ({
   type: types.ADD_TO_CART,
   product,
 });
-export const actRemoveToCart = (_id) => ({
+export const actRemoveToCart = (id) => ({
   type: types.REMOVE_TO_CART,
-  _id,
+  id,
 });
 
 export const actRemoveToOneCart = (product) => ({
