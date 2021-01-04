@@ -1,9 +1,11 @@
 import React from "react";
-import ProductsContainer from "./Containers/ProductsContainer/index.js";
-import ProductDetail from "./components/ProductDetail/index.js";
 const HomePage = React.lazy(() => import("./pages/HomePage/index.js"));
 const CheckOutPage = React.lazy(() => import("./pages/CheckOutPage/index.js"));
-
+const ProductDetailPage = React.lazy(() =>
+  import("./pages/ProductDetailPage/index.js")
+);
+const NotFound = React.lazy(() => import("./components/NotFound/index.js"));
+const ProductsPage = React.lazy(() => import("./pages/ProductsPage/index.js"));
 const routes = [
   {
     path: "/",
@@ -15,34 +17,22 @@ const routes = [
     exact: false,
     main: () => <CheckOutPage />,
   },
-  {
-    path: "/dong-ho/:id",
-    exact: true,
-    main: () => <ProductDetail />,
-  },
 
   {
-    path: "/dong-ho",
-    exact: true,
-    main: () => <ProductsContainer />,
-  },
-
-  {
-    path: "/phu-kien/:id",
+    path: "/:products/:id",
     exact: false,
-    main: () => <ProductDetail />,
+    main: () => <ProductDetailPage />,
   },
-
   {
-    path: "/phu-kien",
+    path: "/:products",
     exact: false,
-    main: () => <ProductsContainer />,
+    main: () => <ProductsPage />,
   },
 
   {
     path: "",
     exact: false,
-    main: () => <h1>Not fount</h1>,
+    main: () => <NotFound />,
   },
 ];
 

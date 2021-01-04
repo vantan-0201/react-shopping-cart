@@ -9,7 +9,7 @@ export function actFetchProductDetailRequest(url) {
         const res = await productApi.getProduct(url);
         dispatch(actGetProductDetailSuccess(res));
       } catch (error) {
-        console.log(error);
+        dispatch(actGetProductDetailError(error));
       }
     };
     getProuctDetail();

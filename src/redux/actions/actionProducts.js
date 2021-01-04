@@ -17,7 +17,7 @@ export function actFetchProductsRequest(url, _page, _limit) {
         const res = await productApi.getProductAll(url, params);
         dispatch(actGetProductSuccess(res));
       } catch (error) {
-        console.log(error);
+        dispatch(actGetProductsError(error));
       }
     };
     getProucts();

@@ -18,6 +18,7 @@ export default function ReducerProducts(state = initialState, action) {
       return {
         ...state,
         pending: false,
+        error: null,
         products: [...action.products],
       };
 

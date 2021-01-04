@@ -10,6 +10,8 @@ import {
 import ProductList from "../../components/ProductList";
 import Product from "../../components/Product";
 import Sellers from "../../components/Sellers";
+import Loading from "../../components/Loading";
+import NotFound from "../../components/NotFound";
 
 export default function HomePage() {
   const {
@@ -29,9 +31,6 @@ export default function HomePage() {
     dispatch(actAddToCart(...product));
   };
 
-  // const _page = 1;
-  // const _limit = 4;
-
   useEffect(() => {
     dispatch(actFetchProductsRequest());
   }, []);
@@ -39,27 +38,24 @@ export default function HomePage() {
   const showProductList = (products) => {
     let result = null;
     if (!products.length) return;
-    result = products.map((product, index) => (
-      <Product
-        key={product.id}
-        product={product}
-        addToCart={addToCart}
-        matchProps={1}
-      />
+    result = products.map((product) => (
+      <Product key={product.id} product={product} addToCart={addToCart} />
     ));
     return result;
   };
 
   const filterProductGender = (products, gender) => {
-    return products.filter((product) => product.gender === gender);
+    return products.filter(
+      (product, index) => product.gender === gender && index < 5
+    );
   };
 
   return (
     <>
       {fetchProductsPending ? (
-        <h1>Loading....</h1>
+        <Loading />
       ) : fetchProductsError ? (
-        <h1>Error....</h1>
+        <NotFound />
       ) : (
         <section>
           <Sellers title="MEN'S BEST SELLERS">

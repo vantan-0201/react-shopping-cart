@@ -7,7 +7,9 @@ function Price(props) {
   const { price, className } = props;
 
   return (
-    <span className={className ? className : ""}>{formatCurrency(price)}</span>
+    <span className={className ? className : ""}>
+      {price && formatCurrency(price)}
+    </span>
   );
 }
 

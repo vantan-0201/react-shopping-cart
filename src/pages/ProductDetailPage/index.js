@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Link } from "react-router-dom";
 import "./index.scss";
+import ProductDetailImgs from "../../components/ProductDetailImgs";
+import SlideProductImgs from "../../components/SlideProductImgs";
 
 import Grid from "@material-ui/core/Grid";
 import { Rating } from "@material-ui/lab";
 
-import MyButton from "../MyButton";
+import MyButton from "../../components/MyButton";
 
 import { actFetchProductDetailRequest } from "../../redux/actions/actionProductDetail";
 import { useSelector, useDispatch } from "react-redux";
-import Price from "../Price";
-import ProductDetilInfo from "../ProductDetailInfo";
+import Price from "../../components/Price";
+// import ProductDetilInfo from "../ProductDetailInfo";
+import Loading from "../../components/Loading";
+import NotFound from "../../components/NotFound";
 
-export default function ProductDetail() {
+import { actAddToCart } from "../../redux/actions/actionProducts";
+
+function ProductDetailPage() {
   const dispatch = useDispatch();
 
   const match = useRouteMatch();
@@ -21,12 +27,18 @@ export default function ProductDetail() {
   const {
     fetchProductDetailSucess,
     fetchProductDetailPending,
-    // fetchProductDetailError,
+    fetchProductDetailError,
   } = useSelector((state) => ({
     fetchProductDetailSucess: state.productDetail.productDetail,
     fetchProductDetailPending: state.productDetail.pending,
-    // fetchProductDetailError: state.productDetail.error,
+    fetchProductDetailError: state.productDetail.error,
   }));
+
+  const ref_slideShow = React.useRef();
+
+  const addToCart = () => {
+    dispatch(actAddToCart(fetchProductDetailSucess));
+  };
 
   const {
     name,
@@ -37,12 +49,8 @@ export default function ProductDetail() {
     rating_count,
     status,
     detaiInfo,
-    // imgs_slide,
+    imgs_slide,
   } = fetchProductDetailSucess;
-
-  useEffect(() => {
-    dispatch(actFetchProductDetailRequest(match.url));
-  }, []);
 
   const styleBackground = {
     backgroundImage: `url(${background_img})`,
@@ -51,8 +59,27 @@ export default function ProductDetail() {
     backgroundRepeat: "no-repeat",
   };
 
+  const handelOpenModalImg = (index, e) => {
+    document.getElementById("modal__imgs").classList.add("show");
+    ref_slideShow.current.slickGoTo(index);
+
+    const scrollY = document.documentElement.style.getPropertyValue(
+      "--scroll-y"
+    );
+
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}`;
+  };
+
+  useEffect(() => {
+    dispatch(actFetchProductDetailRequest(match.url));
+  }, []);
+
   return fetchProductDetailPending ? (
-    <h1>Loading....</h1>
+    <Loading />
+  ) : fetchProductDetailError ? (
+    <NotFound />
   ) : (
     <section id="product__Fulldetail" className="product__Fulldetail">
       <div
@@ -123,9 +150,11 @@ export default function ProductDetail() {
                 style={{ marginTop: "40px" }}
               >
                 <span style={{ width: "46%" }}>
-                  <MyButton fullWidth effect txt="thanh toán" />
+                  <Link to="/checkout">
+                    <MyButton fullWidth effect txt="thanh toán" />
+                  </Link>
                 </span>
-                <span style={{ width: "46%" }}>
+                <span style={{ width: "46%" }} onClick={addToCart}>
                   <MyButton fullWidth effect txt="thêm vào giỏ" />
                 </span>
               </div>
@@ -133,29 +162,22 @@ export default function ProductDetail() {
           </Grid>
         </Grid>
 
-        <div className="product__detail__imgs position__absolute flex a-center j-center">
-          <div className="product__detail__img cursor">
-            <img
-              src="https://curnonwatch.com/media/catalog/product/b/x/bx.grand.2.jpg?auto=webp&format=pjpg&width=1600&height=1600&fit=cover&method=fit&nocrop=true"
-              alt="img"
-            />
-          </div>
-          <div className="product__detail__img cursor">
-            <img
-              src="https://curnonwatch.com/media/catalog/product/b/x/bx.grand.2.jpg?auto=webp&format=pjpg&width=1600&height=1600&fit=cover&method=fit&nocrop=true"
-              alt="img"
-            />
-          </div>
-          <div className="product__detail__img cursor">
-            <img
-              src="https://curnonwatch.com/media/catalog/product/b/x/bx.grand.2.jpg?auto=webp&format=pjpg&width=1600&height=1600&fit=cover&method=fit&nocrop=true"
-              alt="img"
-            />
-          </div>
-        </div>
+        <ProductDetailImgs
+          imgsProduct={imgs_slide}
+          handelOpenModalImg={handelOpenModalImg}
+          alt={name}
+        />
       </div>
 
-      <ProductDetilInfo detaiInfo={detaiInfo} />
+      <SlideProductImgs
+        imgsProduct={imgs_slide}
+        ref_slideShow={ref_slideShow}
+        alt={name}
+      />
+
+      {/* <ProductDetilInfo detaiInfo={detaiInfo} /> */}
     </section>
   );
 }
+
+export default ProductDetailPage;

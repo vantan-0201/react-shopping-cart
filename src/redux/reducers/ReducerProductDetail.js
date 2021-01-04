@@ -15,11 +15,11 @@ export default function ProductDetail(state = initialState, action) {
       };
 
     case types.GET_PRODUCTDETAIL_SUCCESS:
-      // console.log(action.product);
       const productDetail = action.product;
       return {
         ...state,
         pending: false,
+        error: null,
         productDetail: productDetail,
       };
 

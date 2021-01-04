@@ -11,16 +11,15 @@ import Grid from "@material-ui/core/Grid";
 export default function ProductDetilInfo(props) {
   const { detaiInfo } = props;
 
-  let infoLi = "";
-  for (let i in detaiInfo) {
-    infoLi += `<li className="txt__infos__detail__item">
-          ${i} <strong>${detaiInfo[i]}</strong>
-        </li>`;
-  }
-
-  //   React.useEffect(() => {
-  //     document.getElementById("details").innerHTML = infoLi;
-  //   }, []);
+  React.useEffect(() => {
+    let infoLi = "";
+    for (let i in detaiInfo) {
+      infoLi += `<li class="txt__infos__detail__item">
+              ${i} <strong>${detaiInfo[i]}</strong>
+            </li>`;
+    }
+    document.getElementById("details").innerHTML = infoLi;
+  }, [detaiInfo]);
 
   const [valueTab, setValueTab] = React.useState("1");
 
@@ -81,16 +80,61 @@ export default function ProductDetilInfo(props) {
                 </ul>
               </Grid>
               <Grid item xs={6}>
-                <ul className="txt__infos__detail" id="details">
-                  {/* <li className="txt__infos__detail__item">
-                    Kích thước mặt <strong>40mm</strong>
-                  </li> */}
-                  {infoLi}
-                </ul>
+                <ul className="txt__infos__detail" id="details"></ul>
               </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="2">
+            <table className="shippingInfo-table">
+              <thead>
+                <tr>
+                  <th>Hình thức vận chuyển</th>
+                  <th>Phạm vi</th>
+                  <th>Phí vận chuyển</th>
+                  <th>Thời gian vận chuyển</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Tiêu chuẩn</td>
+                  <td>Toàn quốc</td>
+                  <td>
+                    <span>
+                      - Miễn phí vận chuyển với đơn hàng từ 700,000đ trở lên
+                    </span>
+                    <br />
+                    <span>
+                      - 30,000đ với đơn hàng có giá trị thấp hơn 700,000đ
+                    </span>
+                  </td>
+
+                  <td>
+                    <span>- Nội thành Hà Nội: 1-2 ngày</span>
+                    <br />
+                    <span>- Miền Trung: 3-5 ngày</span>
+                    <br />
+                    <span>- Miền Nam: 5-7 ngày</span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td rowSpan="2">Chuyển phát nhanh</td>
+                  <td>Nội thành Hà Nội</td>
+                  <td>30,000đ</td>
+                  <td>
+                    4 tiếng kể từ thời gian nhận được điện thoại xác nhận đơn
+                    hàng.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Các tỉnh, thành phố khác</td>
+                  <td>50,000đ</td>
+                  <td>3-5 ngày</td>
+                </tr>
+              </tbody>
+            </table>
+          </TabPanel>
           <TabPanel value="3">
             <h1 className="txt-up product__Fulldetail__info__title">
               1 ĐỔI 1 TRONG VÒNG 3 NGÀY
@@ -108,7 +152,7 @@ export default function ProductDetilInfo(props) {
             </ul>
           </TabPanel>
           <TabPanel value="4">
-            <p style={{ lineHeight: "24px" }}>
+            <p style={{ lineHeight: "24px", fontSize: "15px" }}>
               Curnon cung cấp các phương thức thanh toán an toàn, bạn có thể
               chọn thanh toán bằng{" "}
               <strong>

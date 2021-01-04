@@ -14,6 +14,8 @@ import ProductList from "../../components/ProductList";
 import Fillter from "../../components/Fillter";
 import Product from "../../components/Product";
 import { useRouteMatch } from "react-router-dom";
+import Loading from "../../components/Loading";
+import NotFound from "../../components/NotFound";
 
 export default function ProductsContainer() {
   const {
@@ -47,12 +49,12 @@ export default function ProductsContainer() {
 
   useEffect(() => {
     dispatch(actFetchProductsRequest(match.url, null, null));
-  }, []);
+  }, [match.url]);
 
   const showProductLis = (products) => {
     let result = null;
     if (!products.length) return;
-    result = products.map((product, index) => (
+    result = products.map((product) => (
       <Product key={product.id} product={product} addToCart={addToCart} />
     ));
     return result;
@@ -60,13 +62,15 @@ export default function ProductsContainer() {
 
   return (
     <>
-      <Fillter handleSortProduct={handleSortProduct} count={countProduct} />
       {fetchProductsPending ? (
-        <h1>Loading....</h1>
+        <Loading />
       ) : fetchProductsError ? (
-        <h1>Error....</h1>
+        <NotFound />
       ) : (
-        <ProductList>{showProductLis(fetchProductsSucess)}</ProductList>
+        <>
+          <Fillter handleSortProduct={handleSortProduct} count={countProduct} />
+          <ProductList>{showProductLis(fetchProductsSucess)}</ProductList>
+        </>
       )}
     </>
   );
