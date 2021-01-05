@@ -69,7 +69,7 @@ export default function Header() {
       <Grid
         container
         justify="space-between"
-        alignItems="center"
+        alignItems="stretch"
         className="headerBar position__relative"
       >
         <Hidden smDown={true}>
@@ -120,7 +120,9 @@ export default function Header() {
               component="li"
               className="headerBar__item nav__acounts position__relative"
             >
-              <TitleNav triangle text="tài khoản" />
+              <h3 className="headerBar__item__title txt-up cursor">
+                tài khoản
+              </h3>
               <ul className="dropdownAcount">
                 <li className="dropdownAcount__item">
                   <Link to="/acount">
@@ -139,13 +141,13 @@ export default function Header() {
           <Grid
             item
             component="li"
-            className="headerBar__item nav__cart"
+            className="headerBar__item nav__cart flex a-center"
             onClick={(e) => handelOpenDrawer("cart", e)}
           >
-            <TitleNav
-              text="giỏ hàng"
-              icon={<ShoppingCartIcon fontSize="large" />}
-            />
+            <Hidden smDown={true}>
+              <h3 className="headerBar__item__title txt-up cursor">giỏ hàng</h3>
+            </Hidden>
+            <ShoppingCartIcon fontSize="large" />
             <span className="countCart">{handelTotalCount(countTotal)}</span>
           </Grid>
           <Hidden smDown={true}>

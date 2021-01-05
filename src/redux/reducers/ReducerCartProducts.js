@@ -24,8 +24,6 @@ export default function CartProducts(state = initialState, action) {
       var alreadyInCart = false;
       const product = action.product;
 
-      console.log(product);
-
       duplicateProducts.forEach((item, index) => {
         if (item.id === product.id) {
           item.count++;

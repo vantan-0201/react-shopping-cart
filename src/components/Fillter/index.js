@@ -14,9 +14,17 @@ export default function Fillter(props) {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
+      "@media (max-width: 320px)": {
+        flexDirection: "column",
+        alignItems: "flex-start",
+      },
     },
     fillter__result: {
       fontSize: "14px",
+      "@media (max-width: 320px)": {
+        fontSize: "13px",
+        marginBottom: "10px",
+      },
     },
     fillter__selection: {
       fontSize: "13px",
