@@ -53,7 +53,7 @@ $height_mb: 80px;
         &::after {
           content: "";
           position: absolute;
-          top: calc(100% - 20px);
+          top: calc(100% - 6px);
           left: 50%;
           transform: translateX(-50%);
           transition: opacity 0.3s linear;
@@ -63,6 +63,15 @@ $height_mb: 80px;
           border-right: 10px solid transparent;
           border-top: 10px solid transparent;
           z-index: 1;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          top: 80%;
+          left: 0;
+          right: 0;
+          height: 30px;
+          width: 100%;
         }
         &:hover {
           .dropdownAcount {
@@ -74,7 +83,7 @@ $height_mb: 80px;
         }
         .dropdownAcount {
           position: absolute;
-          top: 100%;
+          top: 82px;
           left: 0;
           min-width: 200px;
           padding: 12px 0;

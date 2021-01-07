@@ -62,3 +62,33 @@
 .fullWidth {
   width: 100%;
 }
+
+.page__account {
+  display: flex;
+  height: 100vh;
+}
+
+.form__style {
+  max-width: 700px;
+  width: 650px;
+  margin: auto;
+  background-color: var(--color-white);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  padding: 70px 100px;
+}
+
+.form__title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+}
+.form__desc {
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 22px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}

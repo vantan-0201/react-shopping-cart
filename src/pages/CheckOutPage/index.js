@@ -14,6 +14,7 @@ import {
 } from "../../validation/SchemaAuthYup";
 import FieldInput from "../../components/CustomFormik/FieldInput";
 import MyButton from "../../components/MyButton";
+import OrdersContainer from "../../Containers/OrdersContainer";
 
 const SchemaLAuth = Yup.object().shape({
   ...email,
@@ -38,7 +39,7 @@ function CheckOutPage(props) {
     <div className="checkOutPage">
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid item xs={6} className="mainStep">
+          <Grid item xs={12} md={6} className="mainStep">
             <div className="mainStep__header">
               <h2 className="txt-up mainStep__title">thông tin khách hàng</h2>
               <p className=" mainStep__desc">
@@ -97,7 +98,9 @@ function CheckOutPage(props) {
               <span className=" mainStep__hotline">HOTLINE: 0868889103</span>
             </div>
           </Grid>
-          <Grid item xs={6} className="checkOutPage__item"></Grid>
+          <Grid item xs={12} md={6} className="checkOutPage__item">
+            <OrdersContainer />
+          </Grid>
         </Grid>
       </Container>
     </div>

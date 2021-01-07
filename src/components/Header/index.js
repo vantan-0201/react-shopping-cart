@@ -125,7 +125,7 @@ export default function Header() {
               </h3>
               <ul className="dropdownAcount">
                 <li className="dropdownAcount__item">
-                  <Link to="/acount">
+                  <Link to="/singin">
                     <TitleNav sizeM text="đăng nhập" />
                   </Link>
                 </li>

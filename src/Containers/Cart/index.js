@@ -11,7 +11,10 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 import IconButton from "@material-ui/core/IconButton";
 import Drawer from "@material-ui/core/Drawer";
-import CartTotalPrice from "../../components/CartTotalPrice";
+import CartTotalPrice from "../../components/TotalPrice";
+
+import { Link } from "react-router-dom";
+import MyButton from "../../components/MyButton";
 
 import {
   actRemoveToCart,
@@ -109,10 +112,12 @@ function Cart() {
             handleKeyUp={handleKeyUp}
           />
 
-          <CartTotalPrice
-            handleCloseCart={handleCloseCart}
-            products={handleTotalPrice(products)}
-          />
+          <CartTotalPrice totalPrice={handleTotalPrice(products)} />
+          <div>
+            <Link to="/checkout" onClick={(e) => handleCloseCart("cart", e)}>
+              <MyButton fullWidth effect className="" txt="thanh toán" />
+            </Link>
+          </div>
         </div>
 
         <div className="cart__footer flex j-between">

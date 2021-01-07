@@ -1,13 +1,12 @@
-.cart__totalPrice {
+.totalPrice {
   padding: 20px 0;
-  .cart__totalPrice__title {
+  .totalPrice__title {
     margin-top: 20px;
     margin-bottom: 20px;
+
     h3 {
       font-weight: 500;
+      font-size: 16px;
     }
-  }
-  .btn__chooseProduct.btn__curnon {
-    visibility: visible;
   }
 }

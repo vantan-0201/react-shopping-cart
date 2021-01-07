@@ -6,6 +6,9 @@ const ProductDetailPage = React.lazy(() =>
 );
 const NotFound = React.lazy(() => import("./components/NotFound/index.js"));
 const ProductsPage = React.lazy(() => import("./pages/ProductsPage/index.js"));
+const Singin = React.lazy(() => import("./pages/Singin/index"));
+const Register = React.lazy(() => import("./pages/Register/index"));
+const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword/index"));
 const routes = [
   {
     path: "/",
@@ -16,6 +19,22 @@ const routes = [
     path: "/checkout",
     exact: false,
     main: () => <CheckOutPage />,
+  },
+
+  {
+    path: "/singin",
+    exact: false,
+    main: () => <Singin />,
+  },
+  {
+    path: "/register",
+    exact: false,
+    main: () => <Register />,
+  },
+  {
+    path: "/forgot-password",
+    exact: false,
+    main: () => <ForgotPassword />,
   },
 
   {
