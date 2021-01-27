@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./index.scss";
 
+import swal from "sweetalert";
+
+import { actLogin, handleAfterLogin } from "../../redux/actions/actUsers";
+
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
@@ -28,6 +32,7 @@ const initialValues = {
 
 export default function Singin() {
   const [checkbox, setCheckbox] = useState(true);
+
   const history = useHistory();
 
   const GreenCheckbox = withStyles({
@@ -40,16 +45,24 @@ export default function Singin() {
     checked: {},
   })((props) => <Checkbox color="default" {...props} />);
 
-  const handleSigin = async (values) => {
-    const { email, password } = values;
-    try {
-      if (email === "vantan@gmail.com" && password === "12345678") {
-        localStorage.setItem("accessToken", 12345678);
-        history.push("/acount");
-      }
-    } catch (errors) {
-      console.log(errors);
-    }
+  const handleSigin = (user) => {
+    actLogin(user)
+      .then(async (res) => {
+        await swal({
+          title: "Great !",
+          text: "Đăng nhập thành công",
+          icon: "success",
+        });
+        handleAfterLogin(res);
+        history.push("/");
+      })
+      .catch((err) =>
+        swal({
+          title: "Something wrong !",
+          text: err,
+          icon: "error",
+        })
+      );
   };
 
   const handleChangeCheckbox = () => {

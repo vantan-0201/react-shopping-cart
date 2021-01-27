@@ -1,0 +1,57 @@
+.community {
+  .community__wrap {
+    .community__content {
+      .community__title {
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+      .community__desc {
+        margin: 20px 0;
+        letter-spacing: 0.8px;
+        opacity: 0.8;
+      }
+      .community__socials {
+        .social__link {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          margin: 0 10px;
+          background-color: black;
+          border-radius: 50%;
+          line-height: 40px;
+          text-align: center;
+          color: var(--color-white);
+          svg {
+            height: 100%;
+          }
+        }
+      }
+      .has__tag {
+        margin-top: 20px;
+      }
+    }
+    .community__img {
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .community {
+    .community__wrap {
+      .community__content {
+        width: 100%;
+      }
+      .community__img {
+        height: 270px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

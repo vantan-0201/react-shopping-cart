@@ -1,12 +1,12 @@
 import * as types from "../../contants/actionTypes";
 import productApi from "../../Api/productApi";
 
-export function actFetchProductDetailRequest(url) {
+export function actFetchProductDetailRequest(id) {
   return (dispatch) => {
     dispatch(actGetProductDetailPending());
     const getProuctDetail = async () => {
       try {
-        const res = await productApi.getProduct(url);
+        const res = await productApi.getProduct(id);
         dispatch(actGetProductDetailSuccess(res));
       } catch (error) {
         dispatch(actGetProductDetailError(error));

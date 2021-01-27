@@ -3,6 +3,9 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
+
+import auth from "../../Api/auth";
 
 import FieldInput from "../../components/CustomFormik/FieldInput";
 
@@ -15,6 +18,8 @@ import * as Yup from "yup";
 import { Form, Field, Formik } from "formik";
 import { email, password } from "../../validation/SchemaAuthYup";
 import MyButton from "../../components/MyButton";
+// import { useDispatch, useSelector } from "react-redux";
+// import { actRegister } from "../../redux/actions/actUsers";
 
 const SchemaLAuth = Yup.object().shape({
   ...email,
@@ -28,6 +33,9 @@ const initialValues = {
 
 export default function Register() {
   const [checkbox, setCheckbox] = useState(true);
+  // const isRegister = useSelector((state) => state.isRegister);
+
+  // const dispatch = useDispatch();
   const history = useHistory();
 
   const GreenCheckbox = withStyles({
@@ -40,15 +48,20 @@ export default function Register() {
     checked: {},
   })((props) => <Checkbox color="default" {...props} />);
 
-  const handleSigin = async (values) => {
-    const { email, password } = values;
+  const handleRegister = async (values) => {
     try {
-      if (email === "vantan@gmail.com" && password === "12345678") {
-        localStorage.setItem("accessToken", 12345678);
-        history.push("/acount");
-      }
-    } catch (errors) {
-      console.log(errors);
+      await auth.register(values);
+      await swal({
+        title: "Đăng kí thành công",
+        icon: "success",
+      });
+      history.push("/singin");
+    } catch (erorr) {
+      swal({
+        title: "Đăng kí thất bại",
+        text: erorr,
+        icon: "error",
+      });
     }
   };
 
@@ -61,7 +74,7 @@ export default function Register() {
       <Formik
         initialValues={initialValues}
         validationSchema={SchemaLAuth}
-        onSubmit={handleSigin}
+        onSubmit={handleRegister}
       >
         {() => (
           <Form className="form__register form__style" id="form__register">

@@ -32,8 +32,6 @@ export default function ProductsContainer() {
 
   const dispatch = useDispatch();
 
-  const countProduct = fetchProductsSucess.length;
-
   const handleSortProduct = (event) => {
     const val = event.target.value;
 
@@ -48,7 +46,8 @@ export default function ProductsContainer() {
   };
 
   useEffect(() => {
-    dispatch(actFetchProductsRequest(match.url, null, null));
+    dispatch(actFetchProductsRequest(null, null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.url]);
 
   const showProductLis = (products) => {
@@ -60,6 +59,13 @@ export default function ProductsContainer() {
     return result;
   };
 
+  const fillterCollectionProducts = (products, category) => {
+    if (!products) return;
+    return products.filter((product) => `/${product.category}` === category);
+  };
+  const countProduct = fillterCollectionProducts(fetchProductsSucess, match.url)
+    .length;
+
   return (
     <>
       {fetchProductsPending ? (
@@ -69,7 +75,11 @@ export default function ProductsContainer() {
       ) : (
         <>
           <Fillter handleSortProduct={handleSortProduct} count={countProduct} />
-          <ProductList>{showProductLis(fetchProductsSucess)}</ProductList>
+          <ProductList>
+            {showProductLis(
+              fillterCollectionProducts(fetchProductsSucess, match.url)
+            )}
+          </ProductList>
         </>
       )}
     </>

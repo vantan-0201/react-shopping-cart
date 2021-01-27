@@ -1,0 +1,24 @@
+.service__main {
+  background-color: #000000;
+  position: relative;
+  .service__item {
+    color: white;
+    height: 70px;
+    .service__text {
+      font-size: 15px;
+      font-weight: 300;
+      margin-left: 10px;
+      line-height: 22px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .service__main {
+    .service__item {
+      .service__text {
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -16,12 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const navLinks = [
   {
-    text: "đồng hồ nam",
-    link: "/dong-ho-nam",
-  },
-  {
-    text: "đồng hồ nữ",
-    link: "/dong-ho-nu",
+    text: "đồng hồ",
+    link: "/dong-ho",
   },
   {
     text: "thương hiệu",
@@ -29,7 +25,7 @@ const navLinks = [
   },
   {
     text: "đăng nhập",
-    link: "/sigin",
+    link: "/singin",
   },
   {
     text: "đăng ký",

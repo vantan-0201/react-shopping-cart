@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import PropTypes from "prop-types";
 
@@ -11,18 +11,19 @@ import ProductList from "../../components/ProductList";
 import Product from "../../components/Product";
 import Sellers from "../../components/Sellers";
 import Loading from "../../components/Loading";
-import NotFound from "../../components/NotFound";
 
 export default function HomePage() {
   const {
     fetchProductsSucess,
-    fetchProductsPending,
-    fetchProductsError,
+    // fetchProductsPending,
+    // fetchProductsError,
   } = useSelector((state) => ({
     fetchProductsSucess: state.products.products,
-    fetchProductsPending: state.products.pending,
-    fetchProductsError: state.products.error,
+    // fetchProductsPending: state.products.pending,
+    // fetchProductsError: state.products.error,
   }));
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -33,6 +34,20 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(actFetchProductsRequest());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let loading;
+    const showLoading = () => {
+      loading = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    };
+    showLoading();
+    return () => {
+      clearTimeout(loading);
+    };
   }, []);
 
   const showProductList = (products) => {
@@ -52,10 +67,8 @@ export default function HomePage() {
 
   return (
     <>
-      {fetchProductsPending ? (
+      {isLoading ? (
         <Loading />
-      ) : fetchProductsError ? (
-        <NotFound />
       ) : (
         <section>
           <Sellers title="MEN'S BEST SELLERS">

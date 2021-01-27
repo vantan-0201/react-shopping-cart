@@ -1,0 +1,36 @@
+.credits {
+  padding: 30px 0;
+  .credit__wrap {
+    margin-top: 0;
+    margin-bottom: 0;
+    .credit__content {
+      .credit__copyRight {
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 12px;
+        line-height: 24px;
+        margin-bottom: 10px;
+      }
+      .credit__text {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 1px;
+      }
+    }
+    .credit__imgs {
+      margin-top: 0;
+      margin-bottom: 0;
+      .credit__img {
+        width: 80px;
+        &:last-child {
+          width: 200px;
+        }
+        .credit__img__link {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

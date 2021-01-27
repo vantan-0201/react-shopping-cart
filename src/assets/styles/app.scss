@@ -64,8 +64,11 @@
 }
 
 .page__account {
-  display: flex;
+  background-color: var(--color-white);
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form__style {
@@ -91,4 +94,33 @@
   line-height: 22px;
   opacity: 0.8;
   margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .page__account {
+    display: unset;
+    height: auto;
+  }
+
+  .form__style {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 40px;
+  }
+
+  .form__title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 1.2px;
+  }
+  .form__desc {
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 22px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
 }

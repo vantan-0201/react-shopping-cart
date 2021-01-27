@@ -1,26 +1,18 @@
 import React from "react";
-const HomePage = React.lazy(() => import("./pages/HomePage/index.js"));
-const CheckOutPage = React.lazy(() => import("./pages/CheckOutPage/index.js"));
-const ProductDetailPage = React.lazy(() =>
-  import("./pages/ProductDetailPage/index.js")
-);
-const NotFound = React.lazy(() => import("./components/NotFound/index.js"));
-const ProductsPage = React.lazy(() => import("./pages/ProductsPage/index.js"));
-const Singin = React.lazy(() => import("./pages/Singin/index"));
-const Register = React.lazy(() => import("./pages/Register/index"));
-const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword/index"));
+import HomePage from "./pages/HomePage/index.js";
+
+import ProductDetailPage from "./pages/ProductDetailPage/index.js";
+import NotFound from "./components/NotFound/index.js";
+import ProductsPage from "./pages/ProductsPage/index.js";
+import Singin from "./pages/Singin/index";
+import Register from "./pages/Register/index";
+import ForgotPassword from "./pages/ForgotPassword/index";
 const routes = [
   {
     path: "/",
     exact: true,
     main: () => <HomePage />,
   },
-  {
-    path: "/checkout",
-    exact: false,
-    main: () => <CheckOutPage />,
-  },
-
   {
     path: "/singin",
     exact: false,
@@ -43,7 +35,12 @@ const routes = [
     main: () => <ProductDetailPage />,
   },
   {
-    path: "/:products",
+    path: "/phu-kien",
+    exact: false,
+    main: () => <ProductsPage />,
+  },
+  {
+    path: "/dong-ho",
     exact: false,
     main: () => <ProductsPage />,
   },

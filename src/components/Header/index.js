@@ -17,6 +17,24 @@ import Hidden from "@material-ui/core/Hidden";
 import { actOpenDrawer } from "../../redux/actions/actionProducts";
 import NavBar from "../NavBar";
 
+const menus = [
+  {
+    to: "dong-ho",
+    label: "đồng hồ",
+    exact: false,
+  },
+  {
+    to: "phu-kien",
+    label: "phụ kiện",
+    exact: false,
+  },
+  {
+    to: "about",
+    label: "thương hiệu",
+    exact: false,
+  },
+];
+
 export default function Header() {
   const [hasAffix, setHasAffix] = React.useState(false);
 
@@ -83,7 +101,7 @@ export default function Header() {
             {/* {
             NAV BAR ------------------------------------------
           } */}
-            <NavBar />
+            <NavBar menus={menus} />
 
             {/* {
             NAV BAR END------------------------------------------
@@ -113,6 +131,7 @@ export default function Header() {
           container
           className="headerBar__right"
           component="ul"
+          spacing={2}
         >
           <Hidden smDown={true}>
             <Grid
@@ -141,11 +160,11 @@ export default function Header() {
           <Grid
             item
             component="li"
-            className="headerBar__item nav__cart flex a-center"
+            className="headerBar__item nav__cart flex a-center cursor"
             onClick={(e) => handelOpenDrawer("cart", e)}
           >
             <Hidden smDown={true}>
-              <h3 className="headerBar__item__title txt-up cursor">giỏ hàng</h3>
+              <h3 className="headerBar__item__title txt-up ">giỏ hàng</h3>
             </Hidden>
             <ShoppingCartIcon fontSize="large" />
             <span className="countCart">{handelTotalCount(countTotal)}</span>

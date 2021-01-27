@@ -54,7 +54,7 @@ function CheckOutPage(props) {
               onSubmit={handleSigin}
             >
               {() => (
-                <Form className="form__style" id="form__checkOut">
+                <Form id="form__checkOut">
                   <Field
                     name="fullName"
                     type="text"
@@ -95,7 +95,7 @@ function CheckOutPage(props) {
                 *Lưu ý: Curnon sẽ liên lạc lại với bạn trong 24h để xác nhận đơn
                 hàng.
               </p>
-              <span className=" mainStep__hotline">HOTLINE: 0868889103</span>
+              <span className="mainStep__hotline">HOTLINE: 0868889103</span>
             </div>
           </Grid>
           <Grid item xs={12} md={6} className="checkOutPage__item">

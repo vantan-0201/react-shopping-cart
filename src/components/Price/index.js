@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import "./index.scss";
 import { formatCurrency } from "../../util";
 
@@ -12,9 +12,5 @@ function Price(props) {
     </span>
   );
 }
-
-Price.propTypes = {
-  price: PropTypes.any.isRequired,
-};
 
 export default Price;

@@ -4,7 +4,7 @@ import * as types from "../../contants/actionTypes";
 
 import productApi from "../../Api/productApi";
 
-export function actFetchProductsRequest(url, _page, _limit) {
+export function actFetchProductsRequest(_page, _limit) {
   return (dispatch) => {
     dispatch(actGetProductsPending());
 
@@ -14,7 +14,7 @@ export function actFetchProductsRequest(url, _page, _limit) {
           _page,
           _limit,
         };
-        const res = await productApi.getProductAll(url, params);
+        const res = await productApi.getProductAll(params);
         dispatch(actGetProductSuccess(res));
       } catch (error) {
         dispatch(actGetProductsError(error));

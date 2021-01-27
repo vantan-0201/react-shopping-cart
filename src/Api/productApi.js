@@ -1,22 +1,16 @@
 import axiosClient from "./axiosClient";
+import * as config from "../contants/config";
 
 const productApi = {
-  getProductAll: (url = "dong-ho", params) => {
+  getProductAll: (params) => {
+    const url = `${config.PRODUCTS}`;
     return axiosClient.get(url, { params });
   },
 
-  getProduct: (url) => {
+  getProduct: (id) => {
+    const url = `${config.PRODUCTS}/${id}`;
     return axiosClient.get(url);
   },
-  // getAccessoriesAll: (params) => {
-  //   const url = "/phu-kien";
-  //   return axiosClient.get(url, { params });
-  // },
-
-  // getAccessories: (id) => {
-  //   const url = `/phu-kien/${id}`;
-  //   return axiosClient.get(url);
-  // },
 };
 
 export default productApi;

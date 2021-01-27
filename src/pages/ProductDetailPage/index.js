@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { useRouteMatch, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./index.scss";
 import ProductDetailImgs from "../../components/ProductDetailImgs";
 import SlideProductImgs from "../../components/SlideProductImgs";
@@ -23,7 +23,7 @@ import ProductCrossSell from "../../components/ProductCrossSell";
 function ProductDetailPage() {
   const dispatch = useDispatch();
 
-  const match = useRouteMatch();
+  const param = useParams();
 
   const {
     fetchProductDetailSucess,
@@ -74,7 +74,8 @@ function ProductDetailPage() {
   };
 
   useEffect(() => {
-    dispatch(actFetchProductDetailRequest(match.url));
+    dispatch(actFetchProductDetailRequest(param.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return fetchProductDetailPending ? (
